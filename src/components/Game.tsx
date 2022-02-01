@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BoardComponent from "./Board";
 import TitleComponent from "./Title";
 import injectSheet from "react-jss";
+import RestartComponent from "./RestartGame";
 import "./Board.css";
 
 const STYLES = {};
@@ -16,6 +17,7 @@ const GameComponent = () => {
     ["", "", ""],
     ["", "", ""],
   ]);
+  const [restart, setRestart] = useState(false);
 
   const alertWin = (winner: string): void => {
     const winMessage = "Player " + winner + " won the game!";
@@ -55,6 +57,9 @@ const GameComponent = () => {
   };
 
   const changeTurn = (col: number, row: number): void => {
+    if (restart) {
+      setRestart(false);
+    }
     if (!winner) {
       const newTurn = currentTurn === "X" ? "O" : "X";
       setCurrentTurn(newTurn);
@@ -62,6 +67,18 @@ const GameComponent = () => {
     }
   };
 
+  const restartGame = (): void => {
+    //reset all the grids
+    setRestart(true);
+    //reset the winner + board
+    setWinner("");
+    setBoard([
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""],
+    ]);
+    console.log(restart);
+  };
   return (
     <>
       <TitleComponent />
@@ -69,7 +86,9 @@ const GameComponent = () => {
         turn={currentTurn}
         onClick={changeTurn}
         gameOver={winner}
+        restartGame={restart}
       />
+      <RestartComponent onClick={restartGame} />
     </>
   );
 };

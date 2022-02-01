@@ -12,6 +12,7 @@ const BoardComponent = (props: {
   turn: string; // denotes what character to play in the grid;
   onClick: (row: number, col: number) => void;
   gameOver: string;
+  restartGame: boolean;
 }): JSX.Element => {
   const boardIndices = [0, 1, 2];
   const board = boardIndices.map((idx) => (
@@ -20,6 +21,7 @@ const BoardComponent = (props: {
       turn={props.turn}
       onClick={(col) => props.onClick(col, idx)}
       gameOver={props.gameOver}
+      restartGame={props.restartGame}
     ></RowComponent>
   ));
 

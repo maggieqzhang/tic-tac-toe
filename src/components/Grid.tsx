@@ -8,8 +8,15 @@ const GridComponent = (props: {
   value: string;
   onClick: () => void;
   gameOver: string;
+  restartGame: boolean;
 }) => {
   const [gridValue, setGridValue] = useState("");
+
+  React.useEffect(() => {
+    if (props.restartGame) {
+      setGridValue("");
+    }
+  }, [props.restartGame]);
 
   return (
     <button
