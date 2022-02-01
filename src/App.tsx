@@ -1,24 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { Game } from "./components/Game";
 
 function App() {
+  // check the win condition after each turn
+  // if it's a win, then put up an alert letting the user know which person won
+
+  // change to the other side (X or O)
+
+  // Make a move at a certain square (probably a click handler from the actual ui)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Game />
     </div>
   );
 }
