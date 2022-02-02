@@ -1,12 +1,26 @@
 import React from "react";
-import "./Title.css";
+import injectSheet from "react-jss";
 
-const TitleComponent = (props: { winner: "X" | "O" | null }) => {
+const STYLES = {
+  title: {
+    marginTop: 0,
+    color: "gold",
+    fontSize: "5vw",
+    fontFamily: "Comic Sans MS, Comic Sans cursive",
+  },
+};
+
+const TitleComponent = (props: {
+  winner: "X" | "O" | null;
+  classes: { [K in keyof typeof STYLES]: string };
+}) => {
   return props.winner === null ? (
-    <h1 className="title">Hello, Welcome to Tic-Tac-Toe!</h1>
+    <h1 className={props.classes.title}>Hello, Welcome to Tic-Tac-Toe!</h1>
   ) : (
-    <h1 className="title">Congrats, the winner is {props.winner}</h1>
+    <h1 className={props.classes.title}>
+      Congrats, the winner is {props.winner}
+    </h1>
   );
 };
 
-export default TitleComponent;
+export const Title = injectSheet(STYLES)(TitleComponent);
