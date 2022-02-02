@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import RowComponent from "./Row";
-import "./Board.css";
+import injectSheet from "react-jss";
 
-// parameters; always
-// return values: almost always, certainly cant hurt
-// variables: quite rarely
-//   -unless you initialize with something that isn't representative of it's final type
+const STYLES = {
+  board: {
+    margin: "0 auto",
+    display: "flex",
+    flexDirection: "column",
+  },
+};
 
 const BoardComponent = (props: {
   onClickCell: (row: number, col: number) => void;
   cellValue: ("X" | "O" | null)[][];
+  classes: { [K in keyof typeof STYLES]: string };
 }): JSX.Element => {
   return (
-    <div className="Board">
+    <div className={props.classes.board}>
       {[0, 1, 2].map((idx) => (
         <RowComponent
           key={idx.toString()}
@@ -24,4 +28,4 @@ const BoardComponent = (props: {
   );
 };
 
-export default BoardComponent;
+export const Board = injectSheet(STYLES)(BoardComponent);

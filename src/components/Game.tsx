@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import BoardComponent from "./Board";
+import { Board } from "./Board";
 import TitleComponent from "./Title";
-import "./Board.css";
 
 const GameComponent = (): JSX.Element => {
   const [currentTurn, setCurrentTurn] = useState<"X" | "O">("X");
@@ -64,7 +63,7 @@ const GameComponent = (): JSX.Element => {
   return (
     <>
       <TitleComponent winner={winningPlayer} />
-      <BoardComponent onClickCell={updateGame} cellValue={board} />
+      <Board onClickCell={updateGame} cellValue={board} />
       <h2 className="title">Current Player: {currentTurn}</h2>
       <button onClick={restartGame}>Click Here to Restart Game</button>
     </>
