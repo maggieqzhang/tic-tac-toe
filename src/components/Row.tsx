@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GridComponent from "./Grid";
+import { Grid } from "./Grid";
 import injectSheet from "react-jss";
 
 const STYLES = {
@@ -17,7 +17,7 @@ const RowComponent = (props: {
   return (
     <div className={props.classes.row}>
       {[0, 1, 2].map((idx) => (
-        <GridComponent
+        <Grid
           key={idx.toString()}
           onClickCell={() => props.onClickCell(idx)}
           cellValue={props.cellValue[idx]}
