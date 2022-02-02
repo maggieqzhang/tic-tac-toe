@@ -1,10 +1,12 @@
 import React from "react";
-import injectSheet from "react-jss";
+import "./Title.css";
 
-// specify the X and O's (maybe use my face and grant's face)
-
-const TitleComponent = () => {
-  return <h1>Hello, Welcome to Tic-Tac-Toe!</h1>;
+const TitleComponent = (props: { gameOver: "X" | "O" | null }) => {
+  return props.gameOver === null ? (
+    <h1 className="title">Hello, Welcome to Tic-Tac-Toe!</h1>
+  ) : (
+    <h1 className="title">Congrats, the winner is {props.gameOver}</h1>
+  );
 };
 
 export default TitleComponent;

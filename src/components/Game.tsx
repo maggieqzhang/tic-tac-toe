@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import BoardComponent from "./Board";
 import TitleComponent from "./Title";
 import "./Board.css";
-// specify the X and O's (maybe use my face and grant's face)
 
 const GameComponent = () => {
   const [currentTurn, setCurrentTurn] = useState<"X" | "O">("X");
@@ -11,12 +10,6 @@ const GameComponent = () => {
     [null, null, null],
     [null, null, null],
   ]);
-  const [restart, setRestart] = useState(false);
-
-  const alertWin = (winner: "X" | "O" | null): void => {
-    const winMessage = `Player ${winner} won the game!`;
-    alert(winMessage);
-  };
 
   const getWinningPlayer = (): "X" | "O" | null => {
     //check for rows + columns to see if player won on turn //make the opposite for turn because turn should've been updated
@@ -32,7 +25,6 @@ const GameComponent = () => {
         return prevTurn;
       }
     }
-
     //check for diagonals
     let leftDiagWinCount = 0;
     let rightDiagWinCount = 0;
@@ -46,15 +38,20 @@ const GameComponent = () => {
     return null;
   };
 
-  const updateGame = (col: number, row: number): void => {
+  const updateGame = (row: number, col: number): void => {
+    if (board[row][col] !== null) {
+      return;
+    }
+    if (winningPlayer !== null) {
+      return;
+    }
     const newBoard = board;
-    newBoard[col][row] = currentTurn;
+    newBoard[row][col] = currentTurn;
     setCurrentTurn(currentTurn === "X" ? "O" : "X");
     setBoard(newBoard);
   };
 
   const restartGame = (): void => {
-    setRestart(true); //missing logic here to fix this if it's already set to restart!
     setBoard([
       [null, null, null],
       [null, null, null],
@@ -62,20 +59,18 @@ const GameComponent = () => {
     ]);
   };
 
-  const winningPlayer = getWinningPlayer(); // try to get rid of the fact that this is firing twice!!! instead of once heck!
-  if (winningPlayer) {
-    alertWin(winningPlayer);
-  }
+  const winningPlayer = getWinningPlayer();
 
   return (
     <>
-      <TitleComponent />
+      <TitleComponent gameOver={winningPlayer} />
       <BoardComponent
         turn={currentTurn}
         onClick={updateGame}
         gameOver={winningPlayer}
-        restartGame={restart}
+        cellValue={board}
       />
+      <h2 className="title">Current Player: {currentTurn}</h2>
       <button onClick={restartGame}>Click here to Restart Game</button>
     </>
   );

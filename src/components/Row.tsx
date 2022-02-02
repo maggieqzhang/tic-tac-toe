@@ -6,7 +6,7 @@ const RowComponent = (props: {
   turn: string; // denotes what character to play in the grid;
   onClick: (index: number) => void;
   gameOver: string | null;
-  restartGame: boolean;
+  cellValue: ("X" | "O" | null)[];
 }): JSX.Element => {
   const rowIndices = [0, 1, 2];
 
@@ -16,9 +16,10 @@ const RowComponent = (props: {
       value={props.turn}
       onClick={() => props.onClick(idx)}
       gameOver={props.gameOver}
-      restartGame={props.restartGame}
+      cellValue={props.cellValue[idx]}
     ></GridComponent>
   ));
+  console.log(props.cellValue);
 
   return <div className="row">{row}</div>;
 };
