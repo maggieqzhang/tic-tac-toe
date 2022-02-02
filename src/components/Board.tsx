@@ -1,5 +1,5 @@
 import React from "react";
-import RowComponent from "./Row";
+import { Row } from "./Row";
 import injectSheet from "react-jss";
 
 const STYLES = {
@@ -18,7 +18,7 @@ const BoardComponent = (props: {
   return (
     <div className={props.classes.board}>
       {[0, 1, 2].map((idx) => (
-        <RowComponent
+        <Row
           key={idx.toString()}
           onClickCell={(row) => props.onClickCell(idx, row)}
           cellValue={props.cellValue[idx]}
