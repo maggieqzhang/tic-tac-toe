@@ -8,25 +8,20 @@ import "./Board.css";
 //   -unless you initialize with something that isn't representative of it's final type
 
 const BoardComponent = (props: {
-  turn: string; // denotes what character to play in the grid;
-  onClick: (row: number, col: number) => void;
-  gameOver: string | null;
+  onClickCell: (row: number, col: number) => void;
   cellValue: ("X" | "O" | null)[][];
 }): JSX.Element => {
-  const boardIndices = [0, 1, 2];
-  const board = boardIndices.map((idx) => (
-    <RowComponent
-      key={idx.toString()}
-      turn={props.turn}
-      onClick={(row) => props.onClick(idx, row)}
-      gameOver={props.gameOver}
-      cellValue={props.cellValue[idx]}
-    ></RowComponent>
-  ));
-
-  console.log(props.cellValue);
-
-  return <div className="Board">{board}</div>;
+  return (
+    <div className="Board">
+      {[0, 1, 2].map((idx) => (
+        <RowComponent
+          key={idx.toString()}
+          onClickCell={(row) => props.onClickCell(idx, row)}
+          cellValue={props.cellValue[idx]}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default BoardComponent;

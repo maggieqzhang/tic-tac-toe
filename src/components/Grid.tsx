@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import "./Grid.css";
 
 const GridComponent = (props: {
-  value: string;
-  onClick: () => void;
-  gameOver: string | null;
+  onClickCell: () => void;
   cellValue: "X" | "O" | null;
-}) => {
+}): JSX.Element => {
   return (
-    <button className="grid" onClick={props.onClick}>
+    <button className="grid" onClick={props.onClickCell}>
       {props.cellValue}
     </button>
   );
